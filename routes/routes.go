@@ -25,6 +25,11 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 	bookService := services.NewBookService(bookRepo)
 	bookController := controllers.NewBookController(bookService)
 
+	// Makanan
+	makananRepo := repositories.NewMakananRepository(db)
+	makananService := services.NewMakananService(makananRepo)
+	makananController := controllers.NewMakananController(makananService)
+
 	api := r.Group("/api")
 	{
 		api.GET("/mahasiswa", mhsController.GetAllMahasiswa)
@@ -32,5 +37,6 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 		api.GET("/ipk", ipkController.GetAllIpk)
 		api.GET("/books", bookController.GetAllBooks)
 		api.GET("/book/:id", bookController.GetById)
+		api.GET("/makanan/:id", makananController.GetById)
 	}
 }
