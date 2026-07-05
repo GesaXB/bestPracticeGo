@@ -2,6 +2,7 @@ package main
 
 import (
 	"ginBestPractice/config"
+	"ginBestPractice/models"
 	"ginBestPractice/routes"
 	"log"
 	"os"
@@ -15,6 +16,7 @@ func main() {
 		log.Fatalf("failed to connect database: %v", err)
 	}
 
+	db.AutoMigrate(models.Film{}, models.Makanan{})
 	server := gin.Default()
 	routes.SetupRoutes(server, db)
 

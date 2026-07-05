@@ -37,6 +37,9 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 		api.GET("/ipk", ipkController.GetAllIpk)
 		api.GET("/books", bookController.GetAllBooks)
 		api.GET("/book/:id", bookController.GetById)
+		api.GET("/makanan", makananController.GetAll)
 		api.GET("/makanan/:id", makananController.GetById)
+		api.POST("/makanan", makananController.Create)
+		api.PUT("/makanan/:id", makananController.Update)
 	}
 }
