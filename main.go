@@ -16,7 +16,7 @@ func main() {
 		log.Fatalf("failed to connect database: %v", err)
 	}
 
-	db.AutoMigrate(models.Film{}, models.Makanan{})
+	db.AutoMigrate(models.Film{}, models.Makanan{}, models.Kategori{}, models.Product{})
 	server := gin.Default()
 	routes.SetupRoutes(server, db)
 

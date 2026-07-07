@@ -30,16 +30,28 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 	makananService := services.NewMakananService(makananRepo)
 	makananController := controllers.NewMakananController(makananService)
 
+	// Kategori
+	kategoriRepo := repositories.NewKategoriRepository(db)
+	KategoriService := services.NewKategoriService(kategoriRepo)
+	kategoriController := controllers.NewKategoriController(KategoriService)
+
 	api := r.Group("/api")
 	{
 		api.GET("/mahasiswa", mhsController.GetAllMahasiswa)
 		api.GET("/mahasiswa/:nim", mhsController.FindById)
-		api.GET("/ipk", ipkController.GetAllIpk)
+
+		api.GET("/ipk", ipkController.GetAll)
+
 		api.GET("/books", bookController.GetAllBooks)
 		api.GET("/book/:id", bookController.GetById)
+
 		api.GET("/makanan", makananController.GetAll)
 		api.GET("/makanan/:id", makananController.GetById)
 		api.POST("/makanan", makananController.Create)
 		api.PUT("/makanan/:id", makananController.Update)
+
+		api.GET("/kategories", kategoriController.GetAll)
+		api.GET("/kategori/:id", kategoriController.GetById)
+		api.POST("/kategories", kategoriController.Create)
 	}
 }
